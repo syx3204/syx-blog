@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新闻文章模板</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        header.shrink {
+            padding: 0.5rem;
+        }
+        header.shrink h1 {
+            font-size: 1.2em;
+        }
+        #backDiv {
+            background: #c9f2ff;
+            border: none;
+            border-radius: 5px;
+            color: rgb(47, 47, 47);
+            padding: 0.5em 1em;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5em 1em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            position: relative;
+        }
+        #backDiv:hover {
+            background: #c9f2ff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        #backDiv::before {
+            content: "‹";
+            margin-right: 0.5em;
+            transition: transform 0.3s ease;
+        }
+        #backDiv:hover::before {
+            transform: translateX(-5px); /* 向左移动 */
+        }
+        main {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        video {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+        }
+        .article-content {
+            margin-top: 4rem; /* 确保内容在header下方 */
+        }
+    </style>
+</head>
+<body>
+    <div id="backDiv" title="返回主页">返回</div>
+    <main class="article-content">
+        <article>
+            <img src="https://via.placeholder.com/800x400" alt="新闻图片" />
+            <h2>新闻标题</h2>
+            <p>这是新闻文章的第一段落，讲述了新闻的主要内容。这里可以详细介绍新闻的核心信息，例如时间、地点、人物等。</p>
+            <video controls>
+                <source src="https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4">
+                您的浏览器不支持 HTML5 视频。
+            </video>
+            <p>这是新闻文章的第二段落，进一步详细描述了新闻的具体细节。可以包括引用、数据、图表等。</p>
+            <h3>子标题</h3>
+            <p>这是新闻文章的一个子标题下的内容，可以用来强调某个重要的方面或细节。</p>
+            <p>最后，总结一下新闻的主要观点和结论，以及对未来的影响。</p>
+        </article>
+    </main>
+    <script>
+        // 返回按钮的功能
+        document.getElementById('backDiv').addEventListener('click', function() {
+            window.location.href = 'https://syxsyx.us.kg/newspage.html'; // 替换成你的返回链接
+        });
+
+        // 监听滚动事件，调整header样式
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 0) {
+                header.classList.add('shrink');
+            } else {
+                header.classList.remove('shrink');
+            }
+        });
+    </script>
+</body>
+</html>

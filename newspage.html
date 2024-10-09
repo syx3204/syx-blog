@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>news</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column; /* 改为column，确保内容垂直排列 */
+            min-height: 100vh; /* 确保body至少占据整个视口高度 */
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 80%;
+            margin-top: 50px; /* 避免与顶部导航重叠 */
+        }
+
+        .news-item {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            position: relative; /* 为发布日期位置做准备 */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            overflow: hidden;
+            text-decoration: none; /* 去掉链接的下划线 */
+            color: inherit; /* 继承父元素的颜色 */
+            display: block;
+            text-align: center; /* 文本居中 */
+        }
+
+        .news-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+        }
+
+        .news-title {
+            color: #333;
+            text-decoration: none;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .news-summary {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* 发布时间标签 */
+        .post-date {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+
+        /* 自定义颜色 */
+        :root {
+            --primary-color: #333;
+            --secondary-color: #777;
+            --hover-color: #555;
+            --background-color: #fff;
+            --shadow-color: rgba(0,0,0,0.1);
+            --hover-shadow-color: rgba(0,0,0,0.2);
+        }
+
+        body {
+            color: var(--primary-color);
+        }
+
+        .news-title {
+            color: var(--primary-color);
+        }
+
+        .news-summary {
+            color: var(--secondary-color);
+        }
+
+        .news-item {
+            background-color: var(--background-color);
+            box-shadow: 0 4px 6px var(--shadow-color);
+        }
+
+        .news-item:hover {
+            box-shadow: 0 8px 12px var(--hover-shadow-color);
+        }
+
+        a {
+            color: var(--primary-color);
+        }
+
+        a:hover {
+            color: var(--hover-color);
+        }
+
+        /* 新增部分 */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background-color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 1000;
+        }
+
+        .header .return-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .header .return-btn:hover {
+            transform: translateX(5px); /* 向右移动 */
+        }
+
+        .header .return-btn span {
+            font-size: 24px;
+            border-radius: 50%;
+            padding: 10px;
+            display: inline-block;
+        }
+
+        .header .return-btn span::before {
+            content: "‹";
+            display: block;
+        }
+
+        .header .title {
+            font-size: 20px;
+            color: #333;
+        }
+
+        /* 占位符div */
+        .placeholder {
+            height: 50px; /* 与.header相同高度 */
+            width: 100%; /* 宽度覆盖整个容器 */
+            visibility: hidden; /* 不显示内容 */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="return-btn" onclick="location.href='https://syxsyx.us.kg'">
+            <span></span>
+        </div>
+        <div class="title">小站新闻/琐事日记</div>
+    </div>
+
+    <!-- 添加占位符div -->
+    <div class="placeholder"></div>
+
+    <div class="container">
+        <a href="news/testnew.html" class="news-item">
+            <h2 class="news-title">测试文章</h2>
+            <p class="news-summary">test</p>
+            <span class="post-date">2024-09-22</span>
+        </a>
+        <!-- 更多新闻条目 -->
+    </div>
+</body>
+</html>

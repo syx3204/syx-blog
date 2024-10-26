@@ -159,7 +159,32 @@
         }
 
 
-
+        /* styles.css */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-content p {
+            margin: 5px 0;
+        }
 
     </style>
 </head>
@@ -183,11 +208,17 @@
         </section>
     </main>
     <footer>
+        <script defer src="https://vercount.one/js"></script>
+        <div class="footer-content">
+            <p>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次</p>
+            <p>本站总访客数 <span id="busuanzi_value_site_uv"></span> 人</p>
+        </div>
         版权所有 © <span id="copyrightYear"></span> yx blog
         <script>
             // 获取当前年份并插入到页面中
             document.getElementById('copyrightYear').innerHTML = new Date().getFullYear();
         </script>
+
     </footer>
 
     <script>
@@ -226,5 +257,6 @@
         // 初始化时也设置一次高度
         updateIframeHeight(document.getElementById('articles'));
     </script>
+
 </body>
 </html>

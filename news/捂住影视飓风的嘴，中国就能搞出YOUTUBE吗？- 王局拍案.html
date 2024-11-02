@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>视频播放界面 - 示例</title>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+    }
+    .container {
+        width: 100%;
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 */
+        height: 0;
+        overflow: hidden;
+    }
+    .video-wrapper video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: var(--video-border-radius); /* CSS变量 */
+    }
+    .video-info {
+        margin-top: 20px;
+    }
+    .video-title {
+        font-size: 24px;
+        margin: 10px 0;
+    }
+    .video-stats {
+        color: #777;
+        font-size: 14px;
+    }
+    .video-description {
+        margin: 10px 0;
+        color: #555;
+    }
+    .video-author {
+        font-size: 14px;
+        color: #555;
+    }
+    .actions {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+    }
+    .action-button {
+        background: #f0f0f0;
+        border: none;
+        padding: 10px 20px;
+        margin-right: 10px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    .comments {
+        margin-top: 40px;
+    }
+    .comment {
+        margin-bottom: 20px;
+        padding: 10px;
+        background: #fff;
+        border-radius: 4px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    }
+    .comment-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .comment-body {
+        margin-top: 10px;
+    }
+    .settings {
+        margin-top: 20px;
+    }
+    .settings label {
+        margin-right: 10px;
+    }
+    .loading-status {
+        margin-top: 20px;
+    }
+    .related-video {
+        margin-top: 20px;
+        padding: 20px;
+        background: url('https://m.ccw.site/creator-college/images/6ac762eb76b13343b13ef81a9959c53e.png?x-oss-process=image%2Fformat%2Cwebp') no-repeat center center / cover;
+        border-radius: 10px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        text-align: center;
+        width: 370px;
+        height: 250px;
+        position: relative;
+        transition: background 0.3s;
+    }
+    .related-video a {
+        text-decoration: none;
+        color: #ffffff;
+        font-size: 12px;
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    .related-video:hover {
+        background: url('https://m.ccw.site/creator-college/images/6ac762eb76b13343b13ef81a9959c53e.png?x-oss-process=image%2Fformat%2Cwebp')     cover, rgba(0, 0, 0, 0);
+        backdrop-filter: blur(10px); /* 添加毛玻璃效果 */
+		transition: opacity 0.3s;
+    }
+    .related-video:hover a {
+        opacity: 1;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="video-wrapper">
+        <video id="videoPlayer" controls preload="metadata" style="width: 100%; height: 100%;">
+            <source src="https://m.ccw.site/creator-college/videos/334dfed7e05b3b61275ba4cff4586519.mp4" type="video/mp4">
+            您的浏览器不支持 video 标签。
+        </video>
+    </div>
+    <div class="video-info">
+        <div class="video-title">捂住影视飓风的嘴，中国就能搞出YOUTUBE吗？｜B站｜爱奇艺｜腾讯｜垄断｜5G｜Tim｜王局拍案20241022</div>
+        <div class="video-stats">
+            <span>null次观看</span> • 
+            <span>发布于 2024年10月22日</span>
+        </div>
+        <div class="video-description">
+            
+<pre >	
+知名数码视频自媒体影视飓风在10月8日的时候发布了一个标题为《清晰度不如4年前！视频变糊是你的错觉吗？》的科普视频，该视频主要科普了为何
+大家在视频平台上看到的很多视频，清晰度比以前观看时要糊得多的原因。
+不料，在10月9日下午的时候，影视飓风的官方微博发了一个公告，说因多方原因，该视频只能进行全网下架。
+一个科普视频，为什么会遭到全网封杀？
+</pre>
+        </div>
+        <div class="video-author">
+            作者：<a href="https://www.youtube.com/@wangzhian" target="_blank" style="color: #000000;">王志安 @YouTube</a>
+        </div>
+    </div>
+    <div class="settings">
+        <label><input type="radio" name="border-style" value="rounded" checked> 圆角矩形</label>
+        <label><input type="radio" name="border-style" value="square"> 棱角矩形</label>
+    </div>
+    <div class="actions">
+        <button class="action-button">喜欢</button>
+        <button class="action-button">不喜欢</button>
+        <button class="action-button">分享</button>
+        <button class="action-button">保存</button>
+    </div>
+    <div class="comments">
+        <h3>相关视频</h3>
+        <div class="related-video" onclick="window.location.href='https://example.com/related-video'">
+            <a href="https://example.com/related-video" target="_blank" style="width: 100%;">清晰度不如4年前！视频变糊是你的错觉吗？ - 影视飓风</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 动态设置视频边框样式
+    function setBorderStyle(borderStyle) {
+        const videoElement = document.querySelector('.video-wrapper video');
+        if (borderStyle === 'rounded') {
+            videoElement.style.borderRadius = '10px';
+        } else if (borderStyle === 'square') {
+            videoElement.style.borderRadius = '0';
+        }
+    }
+    
+    // 监听 radio 按钮变化
+    document.querySelectorAll('input[name="border-style"]').forEach((radio) => {
+        radio.addEventListener('change', (event) => {
+            setBorderStyle(event.target.value);
+        });
+    });
+
+    // 初始化默认样式
+    setBorderStyle('rounded');
+</script>
+
+</body>
+</html>

@@ -125,11 +125,43 @@
     .related-video:hover a {
         opacity: 1;
     }
+    #backDiv {
+            background: #c9f2ff;
+            border: none;
+            border-radius: 5px;
+            color: rgb(47, 47, 47);
+            padding: 0.5em 1em;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5em 1em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            position: relative;
+        }
+        #backDiv:hover {
+            background: #c9f2ff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        #backDiv::before {
+            content: "‹";
+            margin-right: 0.5em;
+            transition: transform 0.3s ease;
+        }
+        #backDiv:hover::before {
+            transform: translateX(-5px); /* 向左移动 */
+        }  
+        .placeholder {
+            height: 50px; /* 与.header相同高度 */
+            width: 100%; /* 宽度覆盖整个容器 */
+            visibility: hidden; /* 不显示内容 */
+        }  
 </style>
 </head>
 <body>
 
 <div class="container">
+    <div id="backDiv" title="返回主页">返回</div>
     <div class="video-wrapper">
         <video id="videoPlayer" controls preload="metadata" style="width: 100%; height: 100%;">
             <source src="https://m.ccw.site/creator-college/videos/334dfed7e05b3b61275ba4cff4586519.mp4" type="video/mp4">
@@ -168,7 +200,7 @@
     <div class="comments">
         <h3>相关视频</h3>
         <div class="related-video" onclick="window.location.href='https://example.com/related-video'">
-            <a href="清晰度不如4年前！视频变糊是你的错觉吗？-影视飓风.html" target="_blank" style="width: 100%;">清晰度不如4年前！视频变糊是你的错觉吗？ - 影视飓风</a>
+            <a href="https://example.com/related-video" target="_blank" style="width: 100%;">清晰度不如4年前！视频变糊是你的错觉吗？ - 影视飓风</a>
         </div>
     </div>
 </div>
@@ -194,6 +226,6 @@
     // 初始化默认样式
     setBorderStyle('rounded');
 </script>
-
+<div class="placeholder"></div>
 </body>
 </html>

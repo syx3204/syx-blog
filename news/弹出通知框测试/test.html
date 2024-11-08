@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>现代通知弹出框示例</title>
+<style>
+/* 基本样式 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.notification {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.3s ease-in-out;
+    max-width: 80%; /* 最大宽度限制 */
+    max-height: 90vh; /* 最大高度限制 */
+    overflow-y: hidden; /* 初始状态隐藏垂直滚动条 */
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.notification-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 使关闭按钮靠右对齐 */
+    margin-bottom: 10px;
+    position: sticky;
+    top: 0;
+    background-color: #36b2ffd4;
+    z-index: 1;
+    border-radius: 8px; /* 四个角都设置为圆角 */
+    padding: 10px 20px; /* 添加内边距以确保内容不贴边 */
+}
+
+.notification-header .notification-icon {
+    width: 48px;
+    height: 48px;
+    margin-right: 15px;
+}
+
+.notification-header .title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.notification-content {
+    display: block;
+    white-space: normal;
+    max-height: calc(100% - 70px); /* 考虑标题和底部间距 */
+    overflow-y: auto; /* 内容区域允许垂直滚动 */
+    padding-top: 10px; /* 避免内容与标题重叠 */
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #999;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+</style>
+</head>
+<body>
+
+<!-- 通知弹出框 -->
+<div id="notification" class="notification">
+    <div class="notification-header">
+        <div class="header-content">
+            <img src="通知.svg" alt="通知图标" class="notification-icon">
+            <h3 class="title">重要通知</h3>
+        </div>
+        <button class="close-btn" onclick="closeNotification()">关闭</button>
+    </div>
+    <div class="notification-content">
+        <p>(下面的都是瞎写的)这里是您的通知内容。这里是您的通知内容。这里是您的通知内容。这里是您的通知内容。这里是您的通知内容。这里是您的通知内容。这里是您的通知内容。这里是您的通知内容。这里是您的通知内容。这里是您的通知内容。这里是您的通知内容。这里是您的通知内容。这里是您的通知内容。这里是您的通知内容。这里是您的通知内容。这里是您的通知内容。这里是您的通知内容。这里是您的通知内容。这里是您的通知内容。这里是您的通知内容。</p>
+        <img src="政策文件-m.png"  class="notification-icon">
+        <h2>政策文件</h2>
+        <p>政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件政策文件</p>
+    </div>
+</div>
+
+<script>
+function showNotification() {
+    const notification = document.getElementById('notification');
+    notification.classList.add('show');
+    updateScrollbar(notification);
+}
+
+function closeNotification() {
+    const notification = document.getElementById('notification');
+    notification.classList.remove('show');
+}
+
+function updateScrollbar(notification) {
+    const content = notification.querySelector('.notification-content');
+    const contentHeight = content.scrollHeight; // 获取内容的实际高度
+    const windowHeight = window.innerHeight * 0.9 - 70; // 考虑通知框的边距和内边距及标题高度
+
+    if (contentHeight > windowHeight) {
+        notification.style.overflowY = 'auto'; // 显示垂直滚动条
+    } else {
+        notification.style.overflowY = 'hidden'; // 隐藏垂直滚动条
+    }
+}
+
+// 自动显示通知
+setTimeout(showNotification, 1000); // 1秒后显示通知
+
+// 监听窗口大小变化
+window.addEventListener('resize', function() {
+    const notification = document.getElementById('notification');
+    if (notification.classList.contains('show')) {
+        updateScrollbar(notification);
+    }
+});
+
+// 添加鼠标滚轮事件处理
+document.addEventListener('wheel', function(event) {
+    const notification = document.getElementById('notification');
+    if (notification.classList.contains('show')) {
+        const content = notification.querySelector('.notification-content');
+        content.scrollTop += event.deltaY; // 根据滚轮方向滚动内容
+    }
+});
+</script>
+</body>
+</html>

@@ -151,6 +151,38 @@
             width: 100%; /* 宽度覆盖整个容器 */
             visibility: hidden; /* 不显示内容 */
         }
+
+
+
+
+          body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .countdown-container {
+            position: relative;
+            width: 300px;
+            padding: 20px;
+            border-radius: 15px;
+            background: url('OIP-C.jfif') no-repeat center center, rgba(255, 255, 255, 0.6);
+            background-size: cover;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 8px rgba(186, 183, 183, 0.1);
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: #515253e8;
+            transition: all 0.3s ease;
+          }
+          .countdown-container:hover {
+            transform: scale(1.05);
+          }
+          .countdown {
+            font-size: 2em;
+            font-weight: bold;
+          }
     </style>
 </head>
 <body>
@@ -161,6 +193,64 @@
 
     <!-- 添加占位符div -->
     <div class="placeholder"></div>
+
+    <div class="container">
+                
+        <div class="countdown-container">
+            <h2>距离⌈ 春节 ⌋还有:</h2>
+            <span id="countdown" class="countdown">加载中...</span>
+        </div>
+        
+        <script>
+        // 获取网络时间
+        async function getNetworkTime() {
+          try {
+            const response = await fetch('https://timeapi.io/api/Time/current/zone?timeZone=Asia/Shanghai', {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            });
+            const data = await response.json();
+            return new Date(data.dateTime);
+          } catch (error) {
+            console.error('Error fetching network time:', error);
+            return new Date(); // 如果获取失败，使用本地时间
+          }
+        }
+        
+        // 设置倒计时
+        function setCountdown(startTime) {
+          const countdownDate = new Date('2025-01-29T00:00:00').getTime(); // 春节目标日期
+          const now = new Date().getTime(); // 使用本地时间
+          const elapsed = now - startTime.getTime(); // 计算从初始网络时间到现在的时间差
+          const currentNetworkTime = startTime.getTime() + elapsed; // 计算当前的网络时间
+          const distance = countdownDate - currentNetworkTime;
+        
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+          document.getElementById('countdown').innerText = days + '天 ' + hours + '小时 '
+          + minutes + '分钟 ' + seconds + '秒 ';
+        
+          if (distance < 0) {
+            clearInterval(x);
+            document.getElementById('countdown').innerText = '春节已到！';
+          }
+        }
+        
+        // 初始化倒计时
+        async function initCountdown() {
+          const startTime = await getNetworkTime();
+          setCountdown(startTime);
+          const x = setInterval(() => setCountdown(startTime), 1000);
+        }
+        
+        // 启动倒计时
+        initCountdown();
+        </script>
 
     <div class="container">
         <a href="testnew.html" class="news-item" target="_blank">

@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>捂住影视飓风的嘴，中国就能搞出YOUTUBE吗？- 王局拍案</title>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+    }
+    .container {
+        width: 100%;
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 */
+        height: 0;
+        overflow: hidden;
+    }
+    .video-wrapper video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: var(--video-border-radius); /* CSS变量 */
+    }
+    .video-info {
+        margin-top: 20px;
+    }
+    .video-title {
+        font-size: 24px;
+        margin: 10px 0;
+    }
+    .video-stats {
+        color: #777;
+        font-size: 14px;
+    }
+    .video-description {
+        margin: 10px 0;
+        color: #555;
+    }
+    .video-author {
+        font-size: 14px;
+        color: #555;
+    }
+    .actions {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+    }
+    .action-button {
+        background: #f0f0f0;
+        border: none;
+        padding: 10px 20px;
+        margin-right: 10px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    .comments {
+        margin-top: 40px;
+    }
+    .comment {
+        margin-bottom: 20px;
+        padding: 10px;
+        background: #fff;
+        border-radius: 4px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    }
+    .comment-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .comment-body {
+        margin-top: 10px;
+    }
+    .settings {
+        margin-top: 20px;
+    }
+    .settings label {
+        margin-right: 10px;
+    }
+    .loading-status {
+        margin-top: 20px;
+    }
+    .related-video {
+        margin-top: 20px;
+        padding: 20px;
+        background: url('https://m.ccw.site/creator-college/images/6ac762eb76b13343b13ef81a9959c53e.png?x-oss-process=image%2Fformat%2Cwebp') no-repeat center center / cover;
+        border-radius: 10px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        text-align: center;
+        width: 370px;
+        height: 250px;
+        position: relative;
+        transition: background 0.3s;
+    }
+    .related-video a {
+        text-decoration: none;
+        color: #ffffff;
+        font-size: 12px;
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    .related-video:hover {
+        background: url('https://m.ccw.site/creator-college/images/6ac762eb76b13343b13ef81a9959c53e.png?x-oss-process=image%2Fformat%2Cwebp')     cover, rgba(0, 0, 0, 0);
+        backdrop-filter: blur(10px); /* 添加毛玻璃效果 */
+		transition: opacity 0.3s;
+    }
+    .related-video:hover a {
+        opacity: 1;
+    }
+    #backDiv {
+            background: #c9f2ff;
+            border: none;
+            border-radius: 5px;
+            color: rgb(47, 47, 47);
+            padding: 0.5em 1em;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5em 1em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            position: relative;
+        }
+        #backDiv:hover {
+            background: #c9f2ff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        #backDiv::before {
+            content: "‹";
+            margin-right: 0.5em;
+            transition: transform 0.3s ease;
+        }
+        #backDiv:hover::before {
+            transform: translateX(-5px); /* 向左移动 */
+        }  
+        .placeholder {
+            height: 50px; /* 与.header相同高度 */
+            width: 100%; /* 宽度覆盖整个容器 */
+            visibility: hidden; /* 不显示内容 */
+        }  
+</style>
+</head>
+<body>
+<div class="placeholder"></div>
+<div class="container">
+    <div id="backDiv" title="返回主页">返回</div>
+    <div class="video-wrapper">
+        <video id="videoPlayer" controls preload="metadata" style="width: 100%; height: 100%;">
+            <source src="https://m.ccw.site/creator-college/videos/c0c874fe07e43da74e39fd349f0ed2da.mp4" type="video/mp4">
+            您的浏览器不支持 video 标签。
+        </video>
+    </div>
+    <div class="video-info">
+        <div class="video-title">[蔚藍檔案] Vol.1 最終篇「所有奇蹟的起點」</div>
+        <div class="video-stats">
+            <span>null次观看</span> • 
+            <span>发布于 2023年7月21日</span>
+        </div>
+        <div class="video-description">
+            
+<pre >	
+《蔚藍檔案》是由金用河PD帶領研發的全新手機遊戲，包含了學園與社團、學生間展開的引人入勝的事件。遊戲主打學園 × 青春 × 物語三大特色，
+玩家將扮演老師並且指揮槍械武裝美少女學生們作戰，玩家將跟隨著遊戲劇情帶領學生共同解決發生在學園都市的各種事件。遊戲中故事背景建立於
+由數千學園集合構成的巨大學園都市中，在玩家開始任職教師不久後，陸續發生了奇怪事件，需要身為老師的玩家們，帶領著學生去解決。
+</pre>
+        </div>
+        <div class="video-author">
+            作者：<a href="https://www.youtube.com/@bluearchive_tw" target="_blank" style="color: #000000;">蔚藍檔案 @YouTube</a>
+        </div>
+    </div>
+    <div class="settings">
+        <label><input type="radio" name="border-style" value="rounded" checked> 圆角矩形</label>
+        <label><input type="radio" name="border-style" value="square"> 棱角矩形</label>
+    </div>
+    <div class="actions">
+        <button class="action-button">喜欢</button>
+        <button class="action-button">不喜欢</button>
+        <button class="action-button">分享</button>
+        <button class="action-button">保存</button>
+    </div>
+    
+</div>
+
+<script>
+    // 动态设置视频边框样式
+    function setBorderStyle(borderStyle) {
+        const videoElement = document.querySelector('.video-wrapper video');
+        if (borderStyle === 'rounded') {
+            videoElement.style.borderRadius = '10px';
+        } else if (borderStyle === 'square') {
+            videoElement.style.borderRadius = '0';
+        }
+    }
+    
+    // 监听 radio 按钮变化
+    document.querySelectorAll('input[name="border-style"]').forEach((radio) => {
+        radio.addEventListener('change', (event) => {
+            setBorderStyle(event.target.value);
+        });
+    });
+
+    // 初始化默认样式
+    setBorderStyle('rounded');
+</script>
+<div class="placeholder"></div>
+</body>
+</html>

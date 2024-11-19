@@ -14,12 +14,23 @@
             font-family: 'Nunito', sans-serif;
             line-height: 1.6;
             color: #333;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
             display: grid;
             place-items: center;
             min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        video#background-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            filter: brightness(0.5); /* 调整亮度以适应文字 */
         }
 
         header {
@@ -27,7 +38,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #333;
+            background-color: rgba(51, 51, 51, 0.7); /* 半透明背景 */
             color: #fff;
             text-align: center;
             padding: 10px 0;
@@ -88,10 +99,12 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
+            position: relative;
+            z-index: 1;
         }
 
         .post {
-            background: #fff;
+            background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             overflow: hidden;
@@ -133,8 +146,9 @@
             position: fixed;
             bottom: 0;
             width: 100%;
-            background-color: #333;
+            background-color: rgba(51, 51, 51, 0.7); /* 半透明背景 */
             color: #fff;
+            z-index: 1000;
         }
 
         #articles .iframe-container {
@@ -151,43 +165,19 @@
             height: 100%;
         }
 
-        /* 添加一些媒体查询来支持响应式设计 */
         @media screen and (max-width: 768px) {
             main {
                 grid-template-columns: 1fr;
             }
         }
-
-
-        /* styles.css */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
-        
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 20px 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-        
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .footer-content p {
-            margin: 5px 0;
-        }
     </style>
 </head>
 <body>
+    <video id="background-video" autoplay loop muted playsinline>
+        <source src="https://m.ccw.site/creator-college/videos/10711d95b019bc1a4a53ecc7e1538fb8.mp4" type="video/mp4">
+        您的浏览器不支持HTML5视频。
+    </video>
+
     <header>
         <nav>
             <ul>
@@ -202,23 +192,12 @@
             <p>这是blog的首页，可以看到，这里很<del>简洁</del>(功能还没做)</p>
         </section>
         <section id="articles" style="display: none;">
-            <iframe src="news/newspage.html" frameborder="0" style = "margin-top: 100px;width: 100%;height:81%;"></iframe>
-
+            <div class="iframe-container">
+                <iframe src="news/newspage.html" frameborder="0"></iframe>
+            </div>
         </section>
     </main>
 
-
-
-
-
-
-
-
-
-
-
-    
-    
     <footer>
         <script defer src="https://vercount.one/js"></script>
         <div class="footer-content">
@@ -227,48 +206,59 @@
         </div>
         版权所有 © <span id="copyrightYear"></span> yx blog
         <script>
-            // 获取当前年份并插入到页面中
             document.getElementById('copyrightYear').innerHTML = new Date().getFullYear();
         </script>
-
     </footer>
 
     <script>
-        document.querySelectorAll('nav ul li a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                // 移除所有链接上的 active 类
-                document.querySelectorAll('nav ul li a').forEach(lnk => lnk.classList.remove('active'));
-                // 给当前点击的链接添加 active 类
-                this.classList.add('active');
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取导航链接和所有章节
+            const links = document.querySelectorAll('nav ul li a');
+            const sections = document.querySelectorAll('section');
 
-                const sectionId = this.getAttribute('href').substring(1);
-                document.querySelectorAll('section').forEach(section => {
-                    if (section.id === sectionId) {
-                        section.style.display = 'block';
-                        updateIframeHeight(section);
-                    } else {
-                        section.style.display = 'none';
-                    }
+            // 添加点击事件监听器到每个导航链接
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    // 移除所有链接上的 active 类
+                    links.forEach(lnk => lnk.classList.remove('active'));
+                    // 给当前点击的链接添加 active 类
+                    this.classList.add('active');
+
+                    // 根据点击的链接显示相应的章节
+                    const sectionId = this.getAttribute('href').substring(1);
+                    sections.forEach(section => {
+                        if (section.id === sectionId) {
+                            section.style.display = 'block';
+                            updateIframeHeight(section);
+                        } else {
+                            section.style.display = 'none';
+                        }
+                    });
+
+                    // 监听窗口大小变化并更新 iframe 高度
+                    window.addEventListener('resize', () => updateIframeHeight(document.getElementById(sectionId)));
                 });
-
-                window.addEventListener('resize', () => updateIframeHeight(document.getElementById(sectionId)));
             });
-        });
 
-        function updateIframeHeight(section) {
-            if (section.id === 'articles') {
-                const iframeContainer = section.querySelector('.iframe-container');
-                const headerHeight = document.querySelector('header').clientHeight;
-                const footerHeight = document.querySelector('footer').clientHeight;
-                const newHeight = window.innerHeight - headerHeight - footerHeight;
-                iframeContainer.style.height = `${newHeight}px`;
+            // 更新 iframe 高度函数
+            function updateIframeHeight(section) {
+                if (section.id === 'articles') {
+                    const iframeContainer = section.querySelector('.iframe-container');
+                    const headerHeight = document.querySelector('header').clientHeight;
+                    const footerHeight = document.querySelector('footer').clientHeight;
+                    const newHeight = window.innerHeight - headerHeight - footerHeight;
+                    iframeContainer.style.height = `${newHeight}px`;
+                }
             }
-        }
 
-        // 初始化时也设置一次高度
-        updateIframeHeight(document.getElementById('articles'));
+            // 初始化时也设置一次高度
+            updateIframeHeight(document.getElementById('articles'));
+        });
     </script>
-
 </body>
 </html>
+
+
+

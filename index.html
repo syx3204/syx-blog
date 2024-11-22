@@ -191,7 +191,7 @@
     </style>
 </head>
 <body>
-    <video id="background-video" autoplay loop playsinline>
+    <video id="background-video" autoplay loop playsinline muted>
         <source src="https://m.ccw.site/creator-college/videos/c0c874fe07e43da74e39fd349f0ed2da.mp4" type="video/mp4">
         您的浏览器不支持HTML5视频。
     </video>
@@ -278,6 +278,13 @@
 
             // 初始化时也设置一次高度
             updateIframeHeight(document.getElementById('articles'));
+
+            // 尝试自动播放视频
+            try {
+                video.play();
+            } catch (err) {
+                console.error("Failed to play video automatically:", err);
+            }
 
             // 添加点击事件监听器到视频控制按钮
             videoControlButton.addEventListener('click', function() {

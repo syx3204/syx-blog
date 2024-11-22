@@ -44,6 +44,7 @@
             padding: 10px 0;
             z-index: 1000;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: top 0.3s ease-in-out;
         }
 
         nav ul {
@@ -94,7 +95,7 @@
 
         main {
             max-width: 960px;
-            margin: 80px auto 20px;
+            margin: 80px auto 60px; /* 增加底部间距 */
             padding: 20px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -144,11 +145,12 @@
             text-align: center;
             padding: 10px 0;
             position: fixed;
-            bottom: 0;
+            bottom: -50px; /* 初始状态下隐藏 */
             width: 100%;
             background-color: rgba(51, 51, 51, 0.7); /* 半透明背景 */
             color: #fff;
             z-index: 1000;
+            transition: bottom 0.3s ease-in-out;
         }
 
         #articles .iframe-container {
@@ -237,6 +239,10 @@
             const sections = document.querySelectorAll('section');
             const video = document.getElementById('background-video');
             const videoControlButton = document.getElementById('videoControlButton');
+            const header = document.querySelector('header');
+            const footer = document.querySelector('footer');
+
+            let lastScrollTop = 0;
 
             // 添加点击事件监听器到每个导航链接
             links.forEach(link => {
@@ -296,7 +302,38 @@
                     videoControlButton.textContent = '播放';
                 }
             });
+
+            // 监听滚动事件
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+                // 控制导航栏的显示和隐藏
+                if (scrollTop > lastScrollTop && scrollTop > 50) {
+                    header.style.top = '-60px'; // 隐藏导航栏
+                } else {
+                    header.style.top = '0'; // 显示导航栏
+                }
+
+                // 控制访问信息的显示和隐藏
+                const scrollBottom = scrollTop + window.innerHeight;
+                const documentHeight = document.documentElement.scrollHeight;
+                if (documentHeight - scrollBottom < 50) {
+                    footer.style.bottom = '0'; // 显示访问信息
+                } else {
+                    footer.style.bottom = '-50px'; // 隐藏访问信息
+                }
+
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+            }, false);
+
+            // 初始化时检查是否需要显示访问信息
+            if (window.innerHeight >= document.documentElement.scrollHeight) {
+                footer.style.bottom = '0'; // 显示访问信息
+            }
         });
     </script>
 </body>
 </html>
+
+
+

@@ -158,6 +158,12 @@
             visibility: hidden; /* 不显示内容 */
         }  
 </style>
+	  <!-- ... -->
+	<link
+		rel="stylesheet"
+		href="https://unpkg.com/@waline/client@v3/dist/waline.css"
+	/>
+  <!-- ... -->
 </head>
 <body>
 <div class="placeholder"></div>
@@ -222,5 +228,15 @@
     setBorderStyle('rounded');
 </script>
 <div class="placeholder"></div>
+	  <!-- ... -->
+  <div id="waline"></div>
+  <script type="module">
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+    init({
+      el: '#waline',
+      serverURL: 'https://syxsyx.us.kg',
+    });
+  </script>
 </body>
 </html>

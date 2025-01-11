@@ -4,13 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的文章页面</title>
+    <title>miscellaneous</title>
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/@waline/client@v3/dist/waline.css"
+    />
+    <!-- Meta 图标 (可选) -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/@waline/client@v3/dist/waline-meta.css"
+    />
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             overflow-y: scroll; /* 允许页面垂直滚动 */
+            position: relative; /* 确保绝对定位元素（如按钮）相对于body定位 */
         }
 
         video.bg-video {
@@ -24,6 +34,29 @@
             pointer-events: none; /* 确保视频不会干扰其他交互 */
         }
 
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .controls button {
+            display: block;
+            margin: 5px 0;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .controls button:hover {
+            background-color: #0056b3;
+        }
+
         .container {
             width: 80%;
             margin: auto;
@@ -32,7 +65,7 @@
 
         /* 其他样式保持不变 */
         .header, .content, .footer, .expandable-section {
-            background: #0000003a;
+            background: #ffffff8d;
             margin: 20px 0;
             padding: 20px;
             border-radius: 8px;
@@ -66,7 +99,7 @@
             overflow: hidden;
             opacity: 0;
             transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
-            background: #0000003a;
+            background: #ffffff34;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -78,7 +111,7 @@
         }
 
         .rounded-div {
-            background-color: #e9ecef;
+            background-color: #ffffff88;
             padding: 20px;
             margin: 10px 0;
             border-radius: 8px;
@@ -94,7 +127,7 @@
     <div class="container">
         <!-- 页面内容 -->
         <div class="header">
-            <h1>欢迎来到我的文章页面</h1>
+            <h1>Welcome.</h1>
         </div>
 
         <!-- 第一个可展开内容块 -->
@@ -119,47 +152,91 @@
         <!-- 第二个可展开内容块 -->
         <div class="content">
             <p>或者玩玩《MiSide》，逃离病娇。(玩不好被做成卡带)</p>
-            <a href="https://m.ccw.site/creator-college/videos/8e18dc153a3ddaba2454d9a1381d6133.zip" class="button" target="_blank">下载</a>
+            <a href="https://www.downxia.com/downinfo/483350.html" class="button" target="_blank">第三方下载，不保证游戏质量</a>
 
             <div class="expandable-section">
                 <p>没耐心玩到结局？替换存档文件：</p>
                 <button class="toggle-btn" onclick="toggleContent('expandableContent2')">∨ 展开更多内容</button>
                 <div id="expandableContent2" class="content-expandable">
                     <div class="rounded-div">
-                        <p>1.下载全成就文件</p>
-                        <a href="https://m.ccw.site/creator-college/videos/2884e9af4e2ce171626ca23cd4a62efa.zip" class="button" target="_blank">汉化文件下载</a>
-                        <pre>2.解压后将文件夹放入:
-                            Windows用户:%HOMEPATH%\AppData\LocalLow\
-                            Linux用户:~/.local/share/Steam/steamapps/compatdata/2527500/pfx/drive_c/users/steamuser/AppData/LocalLow/
-                        </pre>
+                        <p>1.下载全成就存档文件</p>
+                        <a href="https://m.ccw.site/creator-college/videos/2884e9af4e2ce171626ca23cd4a62efa.zip" class="button" target="_blank">全成就存档下载</a>
+                        <p>2.解压后将文件夹放入:</p>
+                        <p>Windows用户:%HOMEPATH%\AppData\LocalLow\</p>
+                        <p>Linux用户:~/.local/share/Steam/steamapps/compatdata/2527500/pfx/drive_c/users/steamuser/AppData/LocalLow/</p>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="content">
+            <p>支持正版</p>
+            <a href="https://store.steampowered.com/" class="button" target="_blank">正版购买&下载</a>
+        </div>
+        
+        <!-- 第三个可展开内容块 -->
+        <div class="expandable-section">
+            <p>来说两句？</p>
+            <button class="toggle-btn" onclick="toggleContent('expandableContent3')">∨ 展开</button>
+            <div id="expandableContent3" class="content-expandable" >
+                <div id="waline"></div>
+                <script type="module">
+                    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+                    
+                    init({
+                        el: '#waline',
+                        serverURL: 'https://myproject.us.kg',
+                    });
+                </script>
+            </div>
+        </div>
+
+        <div class="content">
+            <script defer src="https://vercount.one/js"></script>
+            <div class="footer-content">
+                本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+                本文总访客量 <span id="busuanzi_value_page_uv"></span> 人
+            </div>
+        </div>
+    </div>
+    <!-- 背景视频 -->
+    <video autoplay loop muted id="bgVideo" class="bg-video">
+        <source src="https://m.ccw.site/creator-college/videos/ebbc220b7a39900fef47371c5766dbf1.mp4" type="video/mp4">
+    </video>
+
+    <!-- 控制按钮 -->
+    <div class="controls">
+        <button id="muteUnmuteBtn">打开声音</button>
+        <button id="playPauseBtn">暂停</button>
     </div>
 
     <script>
-        window.addEventListener('load', function() {
-            var video = document.createElement('video');
-            video.classList.add('bg-video');
-            video.autoplay = true;
-            video.loop = true;
-            video.muted = false; // 不静音
+        const video = document.getElementById('bgVideo');
+        const muteUnmuteBtn = document.getElementById('muteUnmuteBtn');
+        const playPauseBtn = document.getElementById('playPauseBtn');
 
-            var source = document.createElement('source');
-            source.src = 'https://m.ccw.site/creator-college/videos/ebbc220b7a39900fef47371c5766dbf1.mp4'; // 替换为你的视频链接
-            source.type = 'video/mp4';
-
-            video.appendChild(source);
-            document.body.insertBefore(video, document.body.firstChild); // 插入到body的第一个子元素位置
-
-            // 尝试播放视频，注意这个操作可能会被浏览器阻止
-            video.play().catch(function(error) {
-                console.log("自动播放失败:", error);
-                alert("由于浏览器限制，视频无法自动播放，请点击播放按钮。");
-            });
+        // 切换静音状态
+        muteUnmuteBtn.addEventListener('click', () => {
+            if (video.muted) {
+                video.muted = false;
+                muteUnmuteBtn.textContent = '关闭声音';
+            } else {
+                video.muted = true;
+                muteUnmuteBtn.textContent = '打开声音';
+            }
         });
 
+        // 暂停/播放视频
+        playPauseBtn.addEventListener('click', () => {
+            if (video.paused) {
+                video.play();
+                playPauseBtn.textContent = '暂停';
+            } else {
+                video.pause();
+                playPauseBtn.textContent = '播放';
+            }
+        });
+    </script>
+    <script>
         function toggleContent(id) {
             var content = document.getElementById(id);
             var btn = event.target;

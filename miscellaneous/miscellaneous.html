@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的文章页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-y: scroll; /* 允许页面垂直滚动 */
+        }
+
+        video.bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 视频按比例缩放以填满整个屏幕 */
+            z-index: -1; /* 将视频置于背景 */
+            pointer-events: none; /* 确保视频不会干扰其他交互 */
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding-top: 60px; /* 根据需要调整，避免内容被固定视频遮挡 */
+        }
+
+        /* 其他样式保持不变 */
+        .header, .content, .footer, .expandable-section {
+            background: #0000003a;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.5s linear;
+        }
+
+        .button, .toggle-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px 0;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #007BFF;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover, .toggle-btn:hover {
+            background-color: #0056b3;
+        }
+
+        h1, p {
+            color: #333;
+        }
+
+        .content-expandable {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            background: #0000003a;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-expanded {
+            max-height: 500px; /* 根据实际内容调整 */
+            opacity: 1;
+        }
+
+        .rounded-div {
+            background-color: #e9ecef;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+
+        .expandable-section {
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 页面内容 -->
+        <div class="header">
+            <h1>欢迎来到我的文章页面</h1>
+        </div>
+
+        <!-- 第一个可展开内容块 -->
+        <div class="content">
+            <p>听说你有空？来玩玩《Doki Doki Literature Club!》，陪陪monika。</p>
+            <a href="https://m.ccw.site/creator-college/videos/8e18dc153a3ddaba2454d9a1381d6133.zip" class="button" target="_blank">下载</a>
+
+            <div class="expandable-section">
+                <p>看不懂English？汉化教程：</p>
+                <button class="toggle-btn" onclick="toggleContent('expandableContent1')">∨ 展开更多内容</button>
+                <div id="expandableContent1" class="content-expandable">
+                    <div class="rounded-div">
+                        <p>1.下载汉化文件</p>
+                        <a href="https://m.ccw.site/creator-college/videos/d7d741ff78c233fe4ddf369ba95b39de.zip" class="button" target="_blank">汉化文件下载</a>
+                        <p>2.解压汉化文件</p>
+                        <p>3.复制"game"文件夹到游戏目录，选择替换重复文件(如果提示)。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第二个可展开内容块 -->
+        <div class="content">
+            <p>或者玩玩《MiSide》，逃离病娇。(玩不好被做成卡带)</p>
+            <a href="https://m.ccw.site/creator-college/videos/8e18dc153a3ddaba2454d9a1381d6133.zip" class="button" target="_blank">下载</a>
+
+            <div class="expandable-section">
+                <p>没耐心玩到结局？替换存档文件：</p>
+                <button class="toggle-btn" onclick="toggleContent('expandableContent2')">∨ 展开更多内容</button>
+                <div id="expandableContent2" class="content-expandable">
+                    <div class="rounded-div">
+                        <p>1.下载全成就文件</p>
+                        <a href="https://m.ccw.site/creator-college/videos/2884e9af4e2ce171626ca23cd4a62efa.zip" class="button" target="_blank">汉化文件下载</a>
+                        <pre>2.解压后将文件夹放入:
+                            Windows用户:%HOMEPATH%\AppData\LocalLow\
+                            Linux用户:~/.local/share/Steam/steamapps/compatdata/2527500/pfx/drive_c/users/steamuser/AppData/LocalLow/
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', function() {
+            var video = document.createElement('video');
+            video.classList.add('bg-video');
+            video.autoplay = true;
+            video.loop = true;
+            video.muted = false; // 不静音
+
+            var source = document.createElement('source');
+            source.src = 'https://m.ccw.site/creator-college/videos/ebbc220b7a39900fef47371c5766dbf1.mp4'; // 替换为你的视频链接
+            source.type = 'video/mp4';
+
+            video.appendChild(source);
+            document.body.insertBefore(video, document.body.firstChild); // 插入到body的第一个子元素位置
+
+            // 尝试播放视频，注意这个操作可能会被浏览器阻止
+            video.play().catch(function(error) {
+                console.log("自动播放失败:", error);
+                alert("由于浏览器限制，视频无法自动播放，请点击播放按钮。");
+            });
+        });
+
+        function toggleContent(id) {
+            var content = document.getElementById(id);
+            var btn = event.target;
+            if (content.classList.contains("content-expandable") && !content.classList.contains("content-expanded")) {
+                content.classList.add("content-expanded");
+                btn.textContent = "∧ 收起内容";
+            } else {
+                content.classList.remove("content-expanded");
+                btn.textContent = "∨ 展开更多内容";
+            }
+        }
+    </script>
+</body>
+
+</html>

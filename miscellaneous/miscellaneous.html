@@ -137,7 +137,7 @@
 
             <div class="expandable-section">
                 <p>看不懂English？汉化教程：</p>
-                <button class="toggle-btn" onclick="toggleContent('expandableContent1')">∨ 展开更多内容</button>
+                <button class="toggle-btn" onclick="toggleContent('expandableContent1')">∨ 展开</button>
                 <div id="expandableContent1" class="content-expandable">
                     <div class="rounded-div">
                         <p>1.下载汉化文件</p>
@@ -156,7 +156,7 @@
 
             <div class="expandable-section">
                 <p>没耐心玩到结局？替换存档文件：</p>
-                <button class="toggle-btn" onclick="toggleContent('expandableContent2')">∨ 展开更多内容</button>
+                <button class="toggle-btn" onclick="toggleContent('expandableContent2')">∨ 展开</button>
                 <div id="expandableContent2" class="content-expandable">
                     <div class="rounded-div">
                         <p>1.下载全成就存档文件</p>
@@ -242,10 +242,10 @@
             var btn = event.target;
             if (content.classList.contains("content-expandable") && !content.classList.contains("content-expanded")) {
                 content.classList.add("content-expanded");
-                btn.textContent = "∧ 收起内容";
+                btn.textContent = "∧ 收起";
             } else {
                 content.classList.remove("content-expanded");
-                btn.textContent = "∨ 展开更多内容";
+                btn.textContent = "∨ 展开";
             }
         }
     </script>

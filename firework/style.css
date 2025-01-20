@@ -1,0 +1,21 @@
+:root {
+  --title: "Click Crazy Fireworks";
+  --author: "Matt Cannon";
+  --contact: "mc@mattcannon.design";
+  --description: "Random fireworks over a blank void, as is life. Click like crazy to see the finale!";
+  --keywords: "codepenchallenge, cpc-celebration, fireworks, animation, canvas, JavaScript, visual effects, celebration, night sky, particles, interactive, generative art, dynamic display, colorful explosions, seamless animations";
+  --last-modified: "2024-12-16";
+  --content-language: "en";
+  --generator: "HTML5, CSS3, JavaScript";
+}
+
+body {
+  background-color: #000;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+}
